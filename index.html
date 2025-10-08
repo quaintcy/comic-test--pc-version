@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Soul Bled [PC Comic Viewer]</title>
+  <title>TEST [Comic PC Version]</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
@@ -19,7 +19,7 @@
       align-items: center;
     }
 
-    #comic {
+    #comic-container {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -48,9 +48,8 @@
     }
   </style>
 </head>
-
 <body>
-  <div id="comic">
+  <div id="comic-container">
     <img id="comicImage" src="https://raw.githubusercontent.com/quaintcy/comic-test--pc-version/refs/heads/main/pc%20draft%20pages/notestart.png" alt="Soul Bled Comic">
     <button id="fullscreen-btn">⛶</button>
   </div>
@@ -60,7 +59,7 @@
     // FULLSCREEN FEATURE
     // ============================
     const fullscreenBtn = document.getElementById("fullscreen-btn");
-    const comicContainer = document.getElementById("comic");
+    const comicContainer = document.getElementById("comic-container");
 
     fullscreenBtn.addEventListener("click", () => {
       if (!document.fullscreenElement) {
@@ -87,6 +86,11 @@
     let current = 0;
     const comicImage = document.getElementById("comicImage");
 
+    // Mouse click for next page
+    document.body.addEventListener("click", () => {
+      nextImage();
+    });
+
     function nextImage() {
       current = (current + 1) % images.length;
       comicImage.src = images[current];
@@ -97,10 +101,9 @@
       comicImage.src = images[current];
     }
 
-    // Mouse click → next page
-    document.body.addEventListener("click", nextImage);
-
-    // Keyboard navigation
+    // ============================
+    // KEYBOARD NAVIGATION
+    // ============================
     document.addEventListener("keydown", (event) => {
       if (event.key === "ArrowRight") {
         nextImage();
